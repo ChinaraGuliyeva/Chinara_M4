@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/ChinaraGuliyeva/Chinara_M4/issues"
   },
-  "homepage": "https://github.com/ChinaraGuliyeva/Chinara_M4#readme"
+  "homepage": "https://github.com/ChinaraGuliyeva/Chinara_M4#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  }
 }
