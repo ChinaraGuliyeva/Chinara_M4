@@ -45,3 +45,50 @@ p:first-child {
     padding: 0 15px 5px;
     border-radius: 5px;
 }
+
+.converter-container{
+    margin: 56px 253px;
+}
+
+.main-heading{
+    font-size: 36px;
+    line-height: 42px;
+    font-weight: bold;
+}
+
+.loading{
+    display: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: .5;
+}
+
+.inside-loading{
+    display: none;
+    position: absolute;
+    top: 10px;
+    color: black;
+    opacity: 1;
+    z-index: 9999;
+    background-color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 30px;
+    top: 400px;
+    left: 900px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
