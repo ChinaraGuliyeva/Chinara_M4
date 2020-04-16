@@ -25,58 +25,61 @@
     <main>
         <section class="converter-container">
             <h1 class="main-heading">Конвертер валют онлайн</h1>
-            <div class="client-has">
-                <p>У меня есть</p>
-                <form>
-                    <div class="button-container">
-                        <input type="button" value="RUB">
-                        <input type="button" value="USD">
-                        <input type="button" value="EUR">
-                        <input type="button" value="GBP">
-                        <select id="currencies">
-                            <option value="CHF">CHF</option>
-                            <option value="NOK">NOK</option>
-                            <option value="CAD">CAD</option>
-                            <option value="GBP">GBP</option>
-                            <option value="MXN">MXN</option>
-                            <option value="CNY">CNY</option>
-                            <option value="ISK">ISK</option>
-                            <option value="KRW">KRW</option>
-                            <option value="HKD">HKD</option>
-                            <option value="CZK">CZK</option>
-                            <option value="BGN">BGN</option>
-                            <option value="BRL">BRL</option>
-                            <option value="IDR">IDR</option>
-                            <option value="SGD">SGD</option>
-                            <option value="PHP">PHP</option>
-                            <option value="RON">RON</option>
-                            <option value="HUF">HUF</option>
-                            <option value="ILS">ILS</option>
-                            <option value="THB">THB</option>
-                            <option value="SEK">SEK</option>
-                            <option value="NZD">NZD</option>
-                            <option value="AUD">AUD</option>
-                            <option value="DKK">DKK</option>
-                            <option value="HRK">HRK</option>
-                            <option value="PLN">PLN</option>
-                            <option value="TRY">TRY</option>
-                            <option value="INR">INR</option>
-                            <option value="MYR">MYR</option>
-                            <option value="ZAR">ZAR</option>
-                            <option value="JPY">JPY</option>
-                        </select>
-                        <input type="number" class="amount" placeholder="Курс рубля">
-                </form>
+            <div class="container-in-section">
+                <div class="client-has">
+                    <p>У меня есть</p>
+                    <form>
+                        <div class="button-container">
+                            <input class="currency-button" type="button" value="RUB">
+                            <input class="currency-button" type="button" value="USD">
+                            <input class="currency-button" type="button" value="EUR">
+                            <input class="currency-button" type="button" value="GBP">
+                            <select id="currencies">
+                                <option value="CHF">CHF</option>
+                                <option value="NOK">NOK</option>
+                                <option value="CAD">CAD</option>
+                                <option value="GBP">GBP</option>
+                                <option value="MXN">MXN</option>
+                                <option value="CNY">CNY</option>
+                                <option value="ISK">ISK</option>
+                                <option value="KRW">KRW</option>
+                                <option value="HKD">HKD</option>
+                                <option value="CZK">CZK</option>
+                                <option value="BGN">BGN</option>
+                                <option value="BRL">BRL</option>
+                                <option value="IDR">IDR</option>
+                                <option value="SGD">SGD</option>
+                                <option value="PHP">PHP</option>
+                                <option value="RON">RON</option>
+                                <option value="HUF">HUF</option>
+                                <option value="ILS">ILS</option>
+                                <option value="THB">THB</option>
+                                <option value="SEK">SEK</option>
+                                <option value="NZD">NZD</option>
+                                <option value="AUD">AUD</option>
+                                <option value="DKK">DKK</option>
+                                <option value="HRK">HRK</option>
+                                <option value="PLN">PLN</option>
+                                <option value="TRY">TRY</option>
+                                <option value="INR">INR</option>
+                                <option value="MYR">MYR</option>
+                                <option value="ZAR">ZAR</option>
+                                <option value="JPY">JPY</option>
+                            </select>
+                        </div>
+                            <input type="number" class="amount" value="1">
+                            <div class="rate">Курс</div>
+                    </form>
             </div>
-            </div>
+                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="exchange-alt" class="arrows" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M0 168v-16c0-13.255 10.745-24 24-24h360V80c0-21.367 25.899-32.042 40.971-16.971l80 80c9.372 9.373 9.372 24.569 0 33.941l-80 80C409.956 271.982 384 261.456 384 240v-48H24c-13.255 0-24-10.745-24-24zm488 152H128v-48c0-21.314-25.862-32.08-40.971-16.971l-80 80c-9.372 9.373-9.372 24.569 0 33.941l80 80C102.057 463.997 128 453.437 128 432v-48h360c13.255 0 24-10.745 24-24v-16c0-13.255-10.745-24-24-24z"></path></svg>
             <div class="client-has">
                 <p>Хочу приобрести</p>
                 <form>
                     <div class="button-container">
-                        <input type="button" value="RUB">
-                        <input type="button" value="USD">
-                        <input type="button" value="EUR">
-                        <input type="button" value="GBP">
+                        <input class="currency-button" type="button" value="RUB">
+                        <input class="currency-button" type="button" value="USD">
+                        <input class="currency-button" type="button" value="EUR">
+                        <input class="currency-button" type="button" value="GBP">
                         <select id="currencies">
                             <option value="CHF">CHF</option>
                             <option value="NOK">NOK</option>
@@ -109,7 +112,9 @@
                             <option value="ZAR">ZAR</option>
                             <option value="JPY">JPY</option>
                         </select>
-                        <input type="number" class="amount" placeholder="Курс рубля">
+                    </div>
+                        <input type="number" class="amount">
+                        <div class="rate">Курс</div>
                 </form>
             </div>
             </div>
