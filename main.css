@@ -6,6 +6,7 @@ header {
     display: flex;
     justify-content: space-around;
     background: #F5F5F6;
+    padding: 25px 0;
 }
 
 .header-navigation{
@@ -15,4 +16,32 @@ header {
 
 .header-navigation > p {
     margin: 0 20px;
+    padding: 10px 0;
+    color: #959BA4;
+}
+
+.sign-in{
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+p:first-child {
+    color: black;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    color: #833AE0;
+}
+
+.a{
+   background-color: #833AE0;
+    color: white;
+    padding: 0 15px 5px;
+    border-radius: 5px;
 }
