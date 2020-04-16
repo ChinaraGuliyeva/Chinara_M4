@@ -128,7 +128,7 @@ form{
     justify-content: space-between;
 }
 
-.currency-button{
+.currency-button, .currency-button2 {
     border: 1px solid #E5E5E5;
     background-color: white;
     padding: 10px;
