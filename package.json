@@ -5,7 +5,8 @@
   "main": "script.js",
   "scripts": {
     "start": "node script.js",
-    "build": "webpack"
+    "build": "webpack",
+    "build:prod": "webpack --config webpack.prod.config.js"
   },
   "repository": {
     "type": "git",
