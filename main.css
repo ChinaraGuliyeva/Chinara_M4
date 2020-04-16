@@ -1,0 +1,18 @@
+body {
+   font-family: 'Roboto', sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-around;
+    background: #F5F5F6;
+}
+
+.header-navigation{
+    display: flex;
+    justify-content: space-around;
+}
+
+.header-navigation > p {
+    margin: 0 20px;
+}
