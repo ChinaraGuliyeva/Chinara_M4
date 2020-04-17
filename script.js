@@ -4,6 +4,8 @@ let rateRurUsd = document.querySelector('.rateRurUsd');
 let insideLoading = document.querySelector('.inside-loading');
 let loading = document.querySelector('.loading');
 let amountInput = document.querySelector('.amount');
+let rurToUsd=document.querySelector('.rateRurUsd');
+let rateUsdRur = document.querySelector('.rateUsdRur');
 
 const showLoading = () => {
     insideLoading.style.display='block';
@@ -15,38 +17,51 @@ const hideLoading = () => {
     loading.style.display='none';
 }
 
-async function getCurrency(currency) {
-    showLoading();
-    let result = await fetch(`https://api.ratesapi.io/api/latest?base=${currency}`);
+const changeColor =(e)=> {
+    toggle(e.target);
+}
+
+const changeColor1 =(e)=> {
+    toggle(e.target);
+    getCurrency();
+}
+
+async function getRateForInput(){
+    let result = await fetch(`https://api.ratesapi.io/api/latest?base=RUB&symbols=USD`);
     let resultData = await result.json();
-    hideLoading();
-    return resultData;
+    console.log(resultData.rates.USD);
+    rurToUsd.innerText = `1 RUB = ${resultData.rates.USD.toFixed(4)} USD`
 }
 
-const currensyHandler = (e) =>{
-    toggle(e.target);
-    console.log(e.target.value);
-    getCurrency(e.target.value);
-    console.log(getCurrency(e.target.value));
-   //console.log(updateValue(e));
-
+async function getRateForInput2(){
+    let result = await fetch(`https://api.ratesapi.io/api/latest?base=USD&symbols=RUB`);
+    let resultData = await result.json();
+    rateUsdRur.innerText = `1 USD = ${resultData.rates.RUB.toFixed(4)} RUB`
 }
 
-//asynch?
-const currencyCalculator = (e) => {
-    toggle(e.target);
-    console.log(e.target.value);
+async function getCurrency() {
+    let currencies = document.querySelectorAll(".selected");
+    currenciesArray = Array.from(currencies);
+    let base=currenciesArray[0].value;
+    let rate=currenciesArray[1].value;
+    let result = await fetch(`https://api.ratesapi.io/api/latest?base=${base}&symbols=${rate}`);
+    let resultData = await result.json();
+    console.log(resultData);
 }
 
 const toggle = (el) => {
-    el.style.backgroundColor = (el.style.backgroundColor == 'white') ? '#833AE0' : 'white'
-  }
-
-let updateValue =(e)=>{
-    return e.target.value;
+    el.classList.toggle("selected");
 }
 
-buttons.forEach(element => element.addEventListener('click', currensyHandler));
-buttons2.forEach(element => element.addEventListener('click', currencyCalculator));
-amountInput.addEventListener('change', updateValue);
+let updateValue =()=>{
+    console.log(amountInput.value);
+}
 
+getRateForInput();
+getRateForInput2();
+
+buttons.forEach(element => element.addEventListener('click', changeColor));
+buttons2.forEach(element => element.addEventListener('click', changeColor1));
+amountInput.addEventListener('change', updateValue);
+//buttons.forEach(element => element.addEventListener('click', getCurrency));
+//buttons2.forEach(element => element.addEventListener('click', getCurrency));

@@ -153,3 +153,7 @@ option{
 .client-has p {
     color: #9F9F9F;
 }
+
+.selected{
+    background-color: #833AE0;
+}
