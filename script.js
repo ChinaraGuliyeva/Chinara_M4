@@ -6,6 +6,7 @@ let loading = document.querySelector('.loading');
 let amountInput = document.querySelector('.amount');
 let rurToUsd=document.querySelector('.rateRurUsd');
 let rateUsdRur = document.querySelector('.rateUsdRur');
+let firstSelect = document.querySelector('.first-select');
 
 const showLoading = () => {
     insideLoading.style.display='block';
@@ -29,7 +30,6 @@ const changeColor1 =(e)=> {
 async function getRateForInput(){
     let result = await fetch(`https://api.ratesapi.io/api/latest?base=RUB&symbols=USD`);
     let resultData = await result.json();
-    console.log(resultData.rates.USD);
     rurToUsd.innerText = `1 RUB = ${resultData.rates.USD.toFixed(4)} USD`
 }
 
@@ -46,7 +46,21 @@ async function getCurrency() {
     let rate=currenciesArray[1].value;
     let result = await fetch(`https://api.ratesapi.io/api/latest?base=${base}&symbols=${rate}`);
     let resultData = await result.json();
-    console.log(resultData);
+    let resultWindow=document.querySelector('.result-amount');
+    console.log(resultWindow.value);
+    if (rate=="RUB"){
+        resultWindow.value=resultData.rates.RUB*amountInput.value;
+    }
+    if (rate=="USD"){
+        resultWindow.value=resultData.rates.USD*amountInput.value;
+    }
+    if (rate=="EUR"){
+        resultWindow.value=resultData.rates.EUR*amountInput.value;
+    }
+    if (rate=="GBP"){
+        resultWindow.value=resultData.rates.GBP*amountInput.value;
+    }
+    console.log(resultData.rates);
 }
 
 const toggle = (el) => {
@@ -63,5 +77,4 @@ getRateForInput2();
 buttons.forEach(element => element.addEventListener('click', changeColor));
 buttons2.forEach(element => element.addEventListener('click', changeColor1));
 amountInput.addEventListener('change', updateValue);
-//buttons.forEach(element => element.addEventListener('click', getCurrency));
-//buttons2.forEach(element => element.addEventListener('click', getCurrency));
+firstSelect.addEventListener('change', changeColor);
