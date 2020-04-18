@@ -40,6 +40,7 @@ async function getRateForInput2(){
 }
 
 async function getCurrency() {
+    showLoading();
     let currencies = document.querySelectorAll(".selected");
     currenciesArray = Array.from(currencies);
     let base=currenciesArray[0].value;
@@ -47,20 +48,12 @@ async function getCurrency() {
     let result = await fetch(`https://api.ratesapi.io/api/latest?base=${base}&symbols=${rate}`);
     let resultData = await result.json();
     let resultWindow=document.querySelector('.result-amount');
-    console.log(resultWindow.value);
-    if (rate=="RUB"){
-        resultWindow.value=resultData.rates.RUB*amountInput.value;
-    }
-    if (rate=="USD"){
-        resultWindow.value=resultData.rates.USD*amountInput.value;
-    }
-    if (rate=="EUR"){
-        resultWindow.value=resultData.rates.EUR*amountInput.value;
-    }
-    if (rate=="GBP"){
-        resultWindow.value=resultData.rates.GBP*amountInput.value;
-    }
-    console.log(resultData.rates);
+    resultWindow.value=resultData.rates[rate]*amountInput.value;
+    rurToUsd.innerText = `1 ${base} = ${resultData.rates[rate].toFixed(4)} ${rate}`;
+    let reverseResult = await fetch(`https://api.ratesapi.io/api/latest?base=${rate}&symbols=${base}`);
+    let reverseResultData = await reverseResult.json();
+    rateUsdRur.innerText = `1  ${rate} = ${reverseResultData.rates[base].toFixed(4)} ${base}`
+    hideLoading();
 }
 
 const toggle = (el) => {
