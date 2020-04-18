@@ -8,6 +8,7 @@ let rurToUsd=document.querySelector('.rateRurUsd');
 let rateUsdRur = document.querySelector('.rateUsdRur');
 let firstSelect = document.querySelector('.first-select');
 let secondSelect = document.querySelector('.second-select');
+let resultWindow=document.querySelector('.result-amount');
 
 const showLoading = () => {
     insideLoading.style.display='block';
@@ -25,6 +26,7 @@ const toggle = (el) => {
 
 const changeColor =(e)=> {
     toggle(e.target);
+    getCurrency()
 }
 
 const changeColor1 =(e)=> {
@@ -35,7 +37,8 @@ const changeColor1 =(e)=> {
 async function getRateForInput(){
     let result = await fetch(`https://api.ratesapi.io/api/latest?base=RUB&symbols=USD`);
     let resultData = await result.json();
-    rurToUsd.innerText = `1 RUB = ${resultData.rates.USD.toFixed(4)} USD`
+    rurToUsd.innerText = `1 RUB = ${resultData.rates.USD.toFixed(4)} USD`;
+    resultWindow.value=resultData.rates.USD*amountInput.value;
 }
 
 async function getRateForInput2(){
@@ -52,9 +55,24 @@ async function getCurrency() {
     let rate=currenciesArray[1].value;
     let result = await fetch(`https://api.ratesapi.io/api/latest?base=${base}&symbols=${rate}`);
     let resultData = await result.json();
-    console.log(resultData);
-    let resultWindow=document.querySelector('.result-amount');
     resultWindow.value=resultData.rates[rate]*amountInput.value;
+    console.log(amountInput.value);
+    rateUsdRur.innerText = `1 ${base} = ${resultData.rates[rate].toFixed(4)} ${rate}`;
+    let reverseResult = await fetch(`https://api.ratesapi.io/api/latest?base=${rate}&symbols=${base}`);
+    let reverseResultData = await reverseResult.json();
+    rurToUsd.innerText = `1  ${rate} = ${reverseResultData.rates[base].toFixed(4)} ${base}`
+    //hideLoading();
+}
+
+async function getCurrencyRight() {
+    //showLoading();
+    let currencies = document.querySelectorAll(".selected");
+    currenciesArray = Array.from(currencies);
+    let base=currenciesArray[1].value;
+    let rate=currenciesArray[0].value;
+    let result = await fetch(`https://api.ratesapi.io/api/latest?base=${base}&symbols=${rate}`);
+    let resultData = await result.json();
+    amountInput.value=resultData.rates[rate]*resultWindow.value;
     rurToUsd.innerText = `1 ${base} = ${resultData.rates[rate].toFixed(4)} ${rate}`;
     let reverseResult = await fetch(`https://api.ratesapi.io/api/latest?base=${rate}&symbols=${base}`);
     let reverseResultData = await reverseResult.json();
@@ -70,3 +88,4 @@ buttons2.forEach(element => element.addEventListener('click', changeColor1));
 firstSelect.addEventListener('change', changeColor);
 secondSelect.addEventListener('change', changeColor1);
 amountInput.addEventListener('change', getRateForInput);
+resultWindow.addEventListener('change', getCurrencyRight);
