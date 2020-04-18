@@ -7,6 +7,7 @@ let amountInput = document.querySelector('.amount');
 let rurToUsd=document.querySelector('.rateRurUsd');
 let rateUsdRur = document.querySelector('.rateUsdRur');
 let firstSelect = document.querySelector('.first-select');
+let secondSelect = document.querySelector('.second-select');
 
 const showLoading = () => {
     insideLoading.style.display='block';
@@ -16,6 +17,10 @@ const showLoading = () => {
 const hideLoading = () => {
     insideLoading.style.display='none';
     loading.style.display='none';
+}
+
+const toggle = (el) => {
+    el.classList.toggle("selected");
 }
 
 const changeColor =(e)=> {
@@ -40,28 +45,21 @@ async function getRateForInput2(){
 }
 
 async function getCurrency() {
-    showLoading();
+    //showLoading();
     let currencies = document.querySelectorAll(".selected");
     currenciesArray = Array.from(currencies);
     let base=currenciesArray[0].value;
     let rate=currenciesArray[1].value;
     let result = await fetch(`https://api.ratesapi.io/api/latest?base=${base}&symbols=${rate}`);
     let resultData = await result.json();
+    console.log(resultData);
     let resultWindow=document.querySelector('.result-amount');
     resultWindow.value=resultData.rates[rate]*amountInput.value;
     rurToUsd.innerText = `1 ${base} = ${resultData.rates[rate].toFixed(4)} ${rate}`;
     let reverseResult = await fetch(`https://api.ratesapi.io/api/latest?base=${rate}&symbols=${base}`);
     let reverseResultData = await reverseResult.json();
     rateUsdRur.innerText = `1  ${rate} = ${reverseResultData.rates[base].toFixed(4)} ${base}`
-    hideLoading();
-}
-
-const toggle = (el) => {
-    el.classList.toggle("selected");
-}
-
-let updateValue =()=>{
-    console.log(amountInput.value);
+    //hideLoading();
 }
 
 getRateForInput();
@@ -69,5 +67,6 @@ getRateForInput2();
 
 buttons.forEach(element => element.addEventListener('click', changeColor));
 buttons2.forEach(element => element.addEventListener('click', changeColor1));
-amountInput.addEventListener('change', updateValue);
 firstSelect.addEventListener('change', changeColor);
+secondSelect.addEventListener('change', changeColor1);
+amountInput.addEventListener('change', getRateForInput);
