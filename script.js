@@ -26,12 +26,16 @@ const toggle = (el) => {
 
 const changeColor =(e)=> {
     toggle(e.target);
-    getCurrency()
+    let currencies1 = document.querySelectorAll(".selected");
+    if (currencies1.length==2){
+    getCurrency()}
 }
 
 const changeColor1 =(e)=> {
     toggle(e.target);
-    getCurrency();
+    let currencies1 = document.querySelectorAll(".selected");
+    if (currencies1.length==2){
+        getCurrency()}
 }
 
 async function getRateForInput(){
@@ -48,7 +52,8 @@ async function getRateForInput2(){
 }
 
 async function getCurrency() {
-    //showLoading();
+    showLoading();
+    try {
     let currencies = document.querySelectorAll(".selected");
     currenciesArray = Array.from(currencies);
     let base=currenciesArray[0].value;
@@ -56,16 +61,19 @@ async function getCurrency() {
     let result = await fetch(`https://api.ratesapi.io/api/latest?base=${base}&symbols=${rate}`);
     let resultData = await result.json();
     resultWindow.value=resultData.rates[rate]*amountInput.value;
-    console.log(amountInput.value);
     rateUsdRur.innerText = `1 ${base} = ${resultData.rates[rate].toFixed(4)} ${rate}`;
     let reverseResult = await fetch(`https://api.ratesapi.io/api/latest?base=${rate}&symbols=${base}`);
     let reverseResultData = await reverseResult.json();
-    rurToUsd.innerText = `1  ${rate} = ${reverseResultData.rates[base].toFixed(4)} ${base}`
-    //hideLoading();
+    rurToUsd.innerText = `1  ${rate} = ${reverseResultData.rates[base].toFixed(4)} ${base}`;}
+    catch(error){
+        alert('Что-то пошло не так');
+    }
+    hideLoading();
 }
 
 async function getCurrencyRight() {
-    //showLoading();
+    showLoading();
+    try {
     let currencies = document.querySelectorAll(".selected");
     currenciesArray = Array.from(currencies);
     let base=currenciesArray[1].value;
@@ -76,8 +84,11 @@ async function getCurrencyRight() {
     rurToUsd.innerText = `1 ${base} = ${resultData.rates[rate].toFixed(4)} ${rate}`;
     let reverseResult = await fetch(`https://api.ratesapi.io/api/latest?base=${rate}&symbols=${base}`);
     let reverseResultData = await reverseResult.json();
-    rateUsdRur.innerText = `1  ${rate} = ${reverseResultData.rates[base].toFixed(4)} ${base}`
-    //hideLoading();
+    rateUsdRur.innerText = `1  ${rate} = ${reverseResultData.rates[base].toFixed(4)} ${base}`}
+    catch(error){
+        alert('Что-то пошло не так');
+    }
+    hideLoading();
 }
 
 getRateForInput();
