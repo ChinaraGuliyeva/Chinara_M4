@@ -113,6 +113,7 @@ async function changeInputs(){
     let temporaruText=rurToUsd.innerText;
     rurToUsd.innerText=rateUsdRur.innerText;
     rateUsdRur.innerText=temporaruText;
+    getCurrency();
 }
 
 getRateForInput();
