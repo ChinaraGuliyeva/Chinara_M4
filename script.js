@@ -9,6 +9,9 @@ let rateUsdRur = document.querySelector('.rateUsdRur');
 let firstSelect = document.querySelector('.first-select');
 let secondSelect = document.querySelector('.second-select');
 let resultWindow=document.querySelector('.result-amount');
+let arrows = document.querySelector('.arrows');
+console.log(arrows);
+
 
 const showLoading = () => {
     insideLoading.style.display='block';
@@ -91,6 +94,27 @@ async function getCurrencyRight() {
     hideLoading();
 }
 
+async function changeInputs(){
+    amountInput.value=resultWindow.value;
+    resultWindow.value='';
+    let currencies1 = document.querySelectorAll(".selected");
+    let result1 = currencies1[0].value;
+    let result2 = currencies1[1].value
+    currencies1[0].classList.remove('selected');
+    currencies1[1].classList.remove('selected');
+    console.log(result1);
+    console.log(result2);
+    buttons.forEach(element => {if(element.value==result2) {
+        element.classList.add('selected');
+    }});
+    buttons2.forEach(element => {if(element.value==result1) {
+        element.classList.add('selected');
+    }});
+    let temporaruText=rurToUsd.innerText;
+    rurToUsd.innerText=rateUsdRur.innerText;
+    rateUsdRur.innerText=temporaruText;
+}
+
 getRateForInput();
 getRateForInput2();
 
@@ -100,3 +124,4 @@ firstSelect.addEventListener('change', changeColor);
 secondSelect.addEventListener('change', changeColor1);
 amountInput.addEventListener('change', getRateForInput);
 resultWindow.addEventListener('change', getCurrencyRight);
+arrows.addEventListener('click', changeInputs)
